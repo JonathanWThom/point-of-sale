@@ -23,3 +23,26 @@ post('/products/new') do
     erb(:errors)
   end
 end
+
+get("/products/:id") do
+  @product = Product.find(params["id"].to_i)
+  erb(:product)
+end
+
+patch("/products/:id/edit") do
+  @product = Product.find(params["id"].to_i)
+  name = params["name"]
+  description = params["description"]
+  price = params["price"]
+  if name == ''
+    name = @product.name
+  end
+  if description == ''
+    description = @product.description
+  end
+  if price == ""
+    price = @product.price
+  end
+  @product.update(:name => name, :description => description, :price => price)
+  erb(:product) 
+end
