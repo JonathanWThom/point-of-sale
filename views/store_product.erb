@@ -5,6 +5,7 @@
 <p> PRICE: $<%= @product.price %> </p>
 
 <form action="/store" method="post">
+  <input type="hidden" name="_method" value="patch">
   <input type="hidden" value="<%= @product.id() %>" name="product_id">
   <button type="submit" class="btn btn-success">Add to Cart</button>
 </form>

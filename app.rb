@@ -8,11 +8,17 @@ require('./lib/cart')
 also_reload('lib/**/*.rb')
 
 get('/') do
+  if Purchase.current_purchase == []
+    @purchase = Purchase.create(:date_of_purchase => Date.today, :purchased => false)
+  else
+    @purchase = Purchase.current_purchase[0]
+  end
   @products = Product.all()
   erb(:index)
 end
 
 post('/products/new') do
+  @purchase = Purchase.current_purchase[0]
   name = params.fetch('name')
   description = params.fetch('description')
   price = params.fetch('price')
@@ -26,11 +32,13 @@ post('/products/new') do
 end
 
 get("/products/:id") do
+  @purchase = Purchase.current_purchase[0]
   @product = Product.find(params["id"].to_i)
   erb(:product)
 end
 
 patch("/products/:id/edit") do
+  @purchase = Purchase.current_purchase[0]
   @product = Product.find(params["id"].to_i)
   name = params["name"]
   description = params["description"]
@@ -49,6 +57,7 @@ patch("/products/:id/edit") do
 end
 
 delete("/") do
+  @purchase = Purchase.current_purchase[0]
   @product = Product.find(params["product_id"].to_i)
   @product.delete
   @products = Product.all
@@ -56,17 +65,21 @@ delete("/") do
 end
 
 get('/store') do
+  @purchase = Purchase.current_purchase[0]
   @products = Product.all()
   erb(:store)
 end
 
 get('/store/:id') do
+  @purchase = Purchase.current_purchase[0]
   @product = Product.find(params['id'].to_i)
   erb(:store_product)
 end
 
-# post('/store/:id') do
-#   added_to_cart = Product.find(params['product_id'].to_i)
-#   Cart.products.new(added_to_cart)
-#   erb(:store)
-# end
+patch('/store') do
+  @purchase = Purchase.current_purchase[0]
+  product = Product.find(params['product_id'].to_i)
+  product.update({:purchase_id => @purchase.id, :purchased => true})
+  @products = Product.all
+  erb(:store)
+end
