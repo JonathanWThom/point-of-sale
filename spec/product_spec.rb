@@ -42,4 +42,6 @@ describe(Product) do
     product2 = Product.create(:name => 'hotdog', :description => 'description', :purchased => false)
     expect(product2.save).to(eq(false))
   end
+
+
 end
