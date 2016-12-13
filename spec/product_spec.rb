@@ -31,4 +31,9 @@ describe(Product) do
       expect(Product.not_purchased()).to(eq([product, product2]))
     end
   end
+
+  it('converts the name to uppercase') do
+    product = Product.create(:name => 'this is the name')
+    expect(product.name()).to(eq('THIS IS THE NAME'))
+  end
 end
