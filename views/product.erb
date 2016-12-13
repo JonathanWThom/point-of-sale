@@ -17,3 +17,11 @@
   </div>
   <button type="submit" class="btn btn-danger">Update</button>
 </form>
+
+<form action="/" method="post">
+  <div class="form-group">
+    <input type="hidden" name="_method" value="delete">
+    <input type="hidden" name="product_id" value="<%= @product.id %>">
+  </div>
+  <button class="btn btn-danger" type="submit">Delete Product</button>
+</form>

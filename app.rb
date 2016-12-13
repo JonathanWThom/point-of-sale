@@ -15,7 +15,7 @@ post('/products/new') do
   name = params.fetch('name')
   description = params.fetch('description')
   price = params.fetch('price')
-  @product = Product.create({:name => name, :description => description, :price => price, :purchased => false})
+  @product = Product.new({:name => name, :description => description, :price => price, :purchased => false})
   if @product.save()
     @products = Product.all()
     erb(:index)
@@ -44,5 +44,22 @@ patch("/products/:id/edit") do
     price = @product.price
   end
   @product.update(:name => name, :description => description, :price => price)
-  erb(:product) 
+  erb(:product)
+end
+
+delete("/") do
+  @product = Product.find(params["product_id"].to_i)
+  @product.delete
+  @products = Product.all
+  erb(:index)
+end
+
+get('/store') do
+  @products = Product.all()
+  erb(:store)
+end
+
+get('/store/:id') do
+  @product = Product.find(params['id'].to_i)
+  erb(:store_product)
 end

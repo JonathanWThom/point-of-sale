@@ -1,0 +1,7 @@
+<h1>Store</h1>
+
+<ul>
+  <% @products.each() do |product| %>
+    <li><a href='/store/<%= product.id() %>'><%= product.name() %></a></li>
+  <% end %>
+</ul>
