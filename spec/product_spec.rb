@@ -36,4 +36,10 @@ describe(Product) do
     product = Product.create(:name => 'this is the name')
     expect(product.name()).to(eq('THIS IS THE NAME'))
   end
+
+  it("tests for uniqueness") do
+    product = Product.create(:name => 'hotdog', :description => 'description', :purchased => false)
+    product2 = Product.create(:name => 'hotdog', :description => 'description', :purchased => false)
+    expect(product2.save).to(eq(false))
+  end
 end

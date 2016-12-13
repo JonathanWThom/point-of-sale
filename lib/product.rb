@@ -1,6 +1,6 @@
 class Product < ActiveRecord::Base
   belongs_to(:purchase)
-  validates(:name, {:presence => true, :length => {:maximum => 20}})
+  validates(:name, {:presence => true, :uniqueness => true, :length => {:maximum => 20}})
   before_save(:uppercase)
 
   scope(:not_purchased, -> do
