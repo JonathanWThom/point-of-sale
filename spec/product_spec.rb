@@ -14,12 +14,12 @@ describe(Product) do
   end
 
   it('tests the presence of the description') do
-    product = Product.create(:description => '')
+    product = Product.create(:description => '', :name =>'name', :price => 9)
     expect(product.save).to(eq(false))
   end
 
   it('tests the presence of the price') do
-    product = Product.create(:price => '')
+    product = Product.create(:price => '', :description => 'description', :name => 'name')
     expect(product.save).to(eq(false))
   end
 
@@ -41,6 +41,11 @@ describe(Product) do
     product = Product.create(:name => 'hotdog', :description => 'description', :purchased => false)
     product2 = Product.create(:name => 'hotdog', :description => 'description', :purchased => false)
     expect(product2.save).to(eq(false))
+  end
+
+  it('makes sure the price only has two decimals') do
+    product = Product.create(:name => 'hardar', :description => 'a hardar', :purchased => false, :price => 5.333)
+    expect(product.save()).to(eq(false))
   end
 
 
