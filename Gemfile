@@ -1,0 +1,11 @@
+source('https://rubygems.org')
+
+gem('sinatra')
+gem('sinatra-contrib', :require => 'sinatra/reloader')
+gem('rspec')
+gem('capybara')
+gem('rake')
+gem('pry')
+gem('pg')
+gem('sinatra-activerecord')
+gem('shoulda-matchers', '~> 2.0')
