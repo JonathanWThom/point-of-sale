@@ -2,7 +2,7 @@
 
 <h3>Products</h3>
 <ul>
-  <% @products.each do |product| %>
+  <% @products.not_purchased.each do |product| %>
     <li><a href='/products/<%= product.id() %>'><%= product.name %></a> -- $ <%= product.price %></li>
   <% end %>
 </ul>
@@ -21,4 +21,5 @@
   <button type='submit' class='btn btn-info'>Add</button>
 </form>
 
+<a href='/sales'>See Sales Report</a>
 <a href='/store'>Store</a>

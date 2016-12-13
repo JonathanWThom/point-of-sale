@@ -98,3 +98,18 @@ patch('/confirmation') do
   @old_purchase = Purchase.find(purchase_id)
   erb(:confirmation)
 end
+
+get('/sales') do
+  @purchase = Purchase.current_purchase[0]
+  erb(:sales)
+end
+
+get('/sales/report') do
+  @purchase = Purchase.current_purchase[0]
+  start_date = params['start_date']
+  # date1 = Date.new(start_date.year, start_date.month, start_date.day)
+  end_date = params['end_date']
+  # date2 = Date.new(end_date.year, end_date.month, end_date.day)
+  @total = Purchase.purchases_total(start_date, end_date)
+  erb(:sales_report)
+end
