@@ -4,12 +4,12 @@ describe(Product) do
   it {should belong_to(:purchase)}
 
   it("tests presence of name attribute") do
-    product = Product.create(:name => "")
+    product = Product.create(:name => "", :description => 'blah', :price => 9)
     expect(product.save).to(eq(false))
   end
 
   it('tests the max length of the name') do
-    product = Product.create(:name => 'a'.*(21))
+    product = Product.create(:name => 'a'.*(21), :description => 'blah', :price => 9)
     expect(product.save).to(eq(false))
   end
 
@@ -25,15 +25,15 @@ describe(Product) do
 
   describe('.not_purchased') do
     it('returns a list of products not purchased yet') do
-      product = Product.create(:name => 'name', :description => 'description', :purchased => false)
-      product2 = Product.create(:name => 'name', :description => 'description', :purchased => false)
-      product3 = Product.create(:name => 'name', :description => 'description', :purchased => true)
+      product = Product.create(:name => 'name', :description => 'description', :purchased => false, :price => 5)
+      product2 = Product.create(:name => 'name', :description => 'description', :purchased => false, :price => 5)
+      product3 = Product.create(:name => 'name', :description => 'description', :purchased => true, :price => 5)
       expect(Product.not_purchased()).to(eq([product, product2]))
     end
   end
 
   it('converts the name to uppercase') do
-    product = Product.create(:name => 'this is the name')
+    product = Product.create(:name => 'this is the name', :description => 'description', :purchased => false, :price => 5)
     expect(product.name()).to(eq('THIS IS THE NAME'))
   end
 

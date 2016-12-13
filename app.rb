@@ -15,8 +15,8 @@ post('/products/new') do
   name = params.fetch('name')
   description = params.fetch('description')
   price = params.fetch('price')
-  product = Product.create({:name => name, :description => description, :price => price, :purchased => false})
-  if product.save()
+  @product = Product.create({:name => name, :description => description, :price => price, :purchased => false})
+  if @product.save()
     @products = Product.all()
     erb(:index)
   else
