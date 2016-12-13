@@ -4,4 +4,9 @@
 
 <p> PRICE: $<%= @product.price %> </p>
 
+<form action="/store" method="post">
+  <input type="hidden" value="<%= @product.id() %>" name="product_id">
+  <button type="submit" class="btn btn-success">Add to Cart</button>
+</form>
+
 <a href='/store'>Return to Store</a>

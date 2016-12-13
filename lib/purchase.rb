@@ -1,18 +1,12 @@
 class Purchase < ActiveRecord::Base
   has_many(:products)
 
-  # scope(:created_between -> do |start_date, end_date|
-  #  where({:date_of_purchase => start_date..end_date}
-  # end)
-
-  # scope(:created_at -> do
-  #   where(:date_of_purchase >=)
-  # end)
-  #
-  # Comment.where(:created_at => @selected_date.beginning_of_day..@selected_date.end_of_day)
-
-  scope(:not_purchased, -> do
+  scope(:current_purchase, -> do
     where({:purchased => false})
+  end)
+
+  scope(:purchase_history, -> do
+    where({:purchased => true})
   end)
 
 

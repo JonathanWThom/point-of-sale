@@ -25,4 +25,19 @@ describe(Purchase) do
       expect(Purchase.purchases_total(purchase1date, purchase2date)).to(eq(18))
     end
   end
+
+  describe(".current_purchase") do
+    it("finds the current_purchase") do
+      purchase = Purchase.create(:date_of_purchase => Date.today, :purchased => false)
+      expect(Purchase.current_purchase).to(eq([purchase]))
+    end
+  end
+
+  describe(".purchase_history") do
+    it("returns all past purchases") do
+      purchase = Purchase.create(:date_of_purchase => Date.today, :purchased => true)
+      purchase1 = Purchase.create(:date_of_purchase => Date.today, :purchased => true)
+      expect(Purchase.purchase_history).to(eq([purchase,purchase1]))
+    end
+   end
 end

@@ -4,6 +4,7 @@ require('sinatra/activerecord')
 require('pry')
 require('./lib/product')
 require('./lib/purchase')
+require('./lib/cart')
 also_reload('lib/**/*.rb')
 
 get('/') do
@@ -63,3 +64,9 @@ get('/store/:id') do
   @product = Product.find(params['id'].to_i)
   erb(:store_product)
 end
+
+# post('/store/:id') do
+#   added_to_cart = Product.find(params['product_id'].to_i)
+#   Cart.products.new(added_to_cart)
+#   erb(:store)
+# end

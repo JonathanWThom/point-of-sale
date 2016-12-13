@@ -2,6 +2,7 @@ require('spec_helper')
 
 describe(Product) do
   it {should belong_to(:purchase)}
+  it {should belong_to(:cart)}
 
   it("tests presence of name attribute") do
     product = Product.create(:name => "", :description => 'blah', :price => 9)

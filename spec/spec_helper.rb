@@ -8,6 +8,7 @@ require('shoulda-matchers')
 require('capybara')
 require('product')
 require('purchase')
+require('cart')
 
 RSpec.configure do |config|
   config.after(:each) do

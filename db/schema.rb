@@ -10,10 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161213162416) do
+ActiveRecord::Schema.define(version: 20161213215503) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "carts", force: :cascade do |t|
+  end
 
   create_table "products", force: :cascade do |t|
     t.string  "name"
@@ -21,10 +24,13 @@ ActiveRecord::Schema.define(version: 20161213162416) do
     t.decimal "price"
     t.boolean "purchased"
     t.integer "purchase_id"
+    t.integer "cart_id"
+    t.index ["name"], name: "index_products_on_name", using: :btree
   end
 
   create_table "purchases", force: :cascade do |t|
-    t.date "date_of_purchase"
+    t.date    "date_of_purchase"
+    t.boolean "purchased"
   end
 
 end
