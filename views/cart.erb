@@ -1,0 +1,13 @@
+<h1> YOUR CART </h1>
+
+<ul>
+  <% @purchase.products.each do |product| %>
+  <li><a href="products/<%= product.id %>"><%= product.name %></a></li>
+  <% end %>
+
+  <h1>Cart Total: $<%= @purchase.total %> </h1>
+
+  <form action="/confirmation" method="post">
+    <input type="hidden" name="_method" value="patch">
+    <button type="submit" class="btn btn-success">Buy some shit!</button>
+  </form>

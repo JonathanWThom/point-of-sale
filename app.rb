@@ -83,3 +83,18 @@ patch('/store') do
   @products = Product.all
   erb(:store)
 end
+
+
+get("/cart") do
+  @purchase = Purchase.current_purchase[0]
+  erb(:cart)
+end
+
+patch('/confirmation') do
+  @purchase = Purchase.current_purchase[0]
+  purchase_id = @purchase.id
+  @purchase.update({:purchased => true})
+  @purchase = Purchase.create(:date_of_purchase => Date.today, :purchased => false)
+  @old_purchase = Purchase.find(purchase_id)
+  erb(:confirmation)
+end

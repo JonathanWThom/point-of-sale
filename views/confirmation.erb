@@ -1,0 +1,10 @@
+<h1>Success Page.</h1>
+
+<h2>You have had success.</h2>
+
+<h3> You bought these things: </h3>
+<ul>
+  <% @old_purchase.products.each() do |product| %>
+  <li><%= product.name() %></li>
+  <% end %>
+</ul>

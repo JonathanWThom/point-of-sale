@@ -6,7 +6,8 @@
   </head>
   <body>
     <div class="container">
-      <h4> CART: <%= @purchase.products.length %> </h4>
+      <h4> <a href="/">HOME </a>
+      <h4> <a href="/cart">CART: </a><%= @purchase.products.length %> </h4>
     </div>
     <div class="container">
       <%= yield %>
