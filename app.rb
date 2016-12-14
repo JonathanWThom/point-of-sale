@@ -1,11 +1,6 @@
-require('sinatra')
-require('sinatra/reloader')
-require('sinatra/activerecord')
-require('pry')
-require('./lib/product')
-require('./lib/purchase')
-require('./lib/cart')
-also_reload('lib/**/*.rb')
+require("bundler/setup")
+Bundler.require(:default)
+Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file }
 
 get('/') do
   if Purchase.current_purchase == []

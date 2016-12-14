@@ -2,7 +2,6 @@ require('spec_helper')
 
 describe(Product) do
   it {should belong_to(:purchase)}
-  it {should belong_to(:cart)}
 
   it("tests presence of name attribute") do
     product = Product.create(:name => "", :description => 'blah', :price => 9)
@@ -27,9 +26,10 @@ describe(Product) do
   describe('.not_purchased') do
     it('returns a list of products not purchased yet') do
       product = Product.create(:name => 'name', :description => 'description', :purchased => false, :price => 5)
-      product2 = Product.create(:name => 'name', :description => 'description', :purchased => false, :price => 5)
+      product2 = Product.create(:name => 'hotdog', :description => 'hamburger', :purchased => false, :price => 5)
       product3 = Product.create(:name => 'name', :description => 'description', :purchased => true, :price => 5)
-      expect(Product.not_purchased()).to(eq([product, product2]))
+
+      expect(Product.not_purchased()).to(eq([product,product2]))
     end
   end
 
